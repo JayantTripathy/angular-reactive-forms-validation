@@ -1,0 +1,198 @@
+<div class="container">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="row">
+            <div class="col-md-2">
+                <label for="firstname">First Name </label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="firstname" name="firstname" formControlName="firstname" class="form-control">
+            </div>
+            <div class="col-md-6 validation-style">
+                <div *ngIf="!firstname?.valid && (firstname?.dirty ||firstname?.touched)">
+                    <div [hidden]="!firstname?.errors?.['required']">
+                        First Name is required
+                    </div>
+                    <div [hidden]="!firstname?.errors?.['minlength']">
+                        Min Length is 10
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row space-in-line">
+            <div class="col-md-2">
+                <label for="lastname">Last Name </label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="lastname" name="lastname" formControlName="lastname" class="form-control">
+            </div>
+            <div class="col-md-6 validation-style">
+
+                <div *ngIf="!lastname?.valid && (lastname?.dirty ||lastname?.touched)">
+                    <div [hidden]="!lastname?.errors?.['pattern']">
+                        Only characters are allowed
+                    </div>
+                    <div [hidden]="!lastname?.errors?.['maxLength']">
+                        Max length allowed is {{lastname?.errors?.['maxlength']?.requiredLength}}
+                    </div>
+                    <div [hidden]="!lastname?.errors?.['required']">
+                        Last Name is required
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row space-in-line">
+            <div class="col-md-2">
+                <label for="email">Email </label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="email" name="email" formControlName="email" class="form-control">
+            </div>
+            <div class="col-md-6 validation-style">
+                <div *ngIf="!email?.valid && (email?.dirty ||email?.touched)">
+                    <div [hidden]="!email?.errors?.['required']">
+                        email is required
+                    </div>
+                    <div [hidden]="!email?.errors?.['email']">
+                        invalid email id
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row space-in-line">
+            <div class="col-md-2">
+                <label for="gender">Geneder </label>
+            </div>
+            <div class="col-md-4">
+                <input type="radio" value="male" id="gender" name="gender" formControlName="gender"> Male
+                <input type="radio" value="female" id="gender" name="gender" formControlName="gender"> Female
+                <input type="radio" value="transgender" id="gender" name="gender" formControlName="gender"> Trans Gender
+            </div>
+            <div class="col-md-6 validation-style">
+                <div *ngIf="!gender?.valid && (gender?.dirty ||gender?.touched)">
+                    <div [hidden]="!gender?.errors?.['required']">
+                        gender is required
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row space-in-line">
+            <div class="col-md-2">
+                <label for="isMarried">Married </label>
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" id="isMarried" name="isMarried" formControlName="isMarried">
+            </div>
+            <div class="col-md-6 validation-style">
+                <div *ngIf="!isMarried?.valid && (isMarried?.dirty ||isMarried?.touched)">
+                    <div [hidden]="!isMarried?.errors?.['required']">
+                        isMarried is required
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row space-in-line">
+            <div class="col-md-2">
+                <label for="country">country </label>
+            </div>
+            <div class="col-md-4">
+                <select id="country" name="country" formControlName="country" class="form-control">
+                    <option [ngValue]="c.id" *ngFor="let c of countryList">
+                        {{c.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-6 validation-style">
+                <div *ngIf="!country?.valid && (country?.dirty ||country?.touched)">
+                    <div [hidden]="!country?.errors?.['required']">
+                        country is required
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div formGroupName="address">
+            <div class="form-group">
+                <div class="row space-in-line">
+                    <div class="col-md-2">
+                        <label for="city">City</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="city" formControlName="city">
+                    </div>
+                    <div class="col-md-6 validation-style">
+                        <div *ngIf="!city?.valid && (city?.dirty ||city?.touched)">
+                            <div [hidden]="!city?.errors?.['required']">
+                                city is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="street">Street</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="street" formControlName="street">
+                    </div>
+                    <div class="col-md-6 validation-style">
+                        <div *ngIf="!street?.valid && (street?.dirty ||street?.touched)">
+                            <div [hidden]="!street?.errors?.['required']">
+                                street is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row space-in-line">
+                    <div class="col-md-2">
+                        <label for="pincode">Pin Code</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="pincode" formControlName="pincode">
+                    </div>
+                    <div class="col-md-6 validation-style">
+                        <div *ngIf="!pincode?.valid && (pincode?.dirty ||pincode?.touched)">
+                            <div [hidden]="!pincode?.errors?.['required']">
+                                pincode is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row space-in-line">
+            <div class="col-md-2">
+                <label> Is Form Valid</label>
+            </div>
+            <div class="col-md-4">
+                {{contactForm.valid}}
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+        <div class="row space-in-line">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-4">
+                <button type="submit" [disabled]="!contactForm.valid" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+    </form>
+</div>
